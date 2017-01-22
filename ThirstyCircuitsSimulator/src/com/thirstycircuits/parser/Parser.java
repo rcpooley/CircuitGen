@@ -73,16 +73,15 @@ public class Parser
 					Value v;
 					if (cachedInputs.containsKey(fromId))
 					{
-						//v = cachedInputs.get(fromId);
-						v = new Value();
+						v = cachedInputs.get(fromId);
 					}
 					else
 					{
 						v = new Value();
 						cachedInputs.put(fromId, v);
+						inputs.add(v);
 					}
 					components[toId].setInput(toNode, v);
-					inputs.add(v);
 				}
 				else if (toId == -1)
 				{

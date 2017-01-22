@@ -90,6 +90,7 @@ public class TogglePage extends AppCompatActivity {
             TextView output = new TextView(this);
             output.setText("Output" + (i + 1));
             output.setTextColor(Color.rgb(200,0,0));
+            output.setTextSize(24);
             output.setId(i);
             outputLayout.addView(output);
         }
@@ -159,7 +160,7 @@ public class TogglePage extends AppCompatActivity {
         whichButton.setTextColor(Color.LTGRAY);
 
         if (inputValues[indexOfButton]) {
-            whichButton.setBackgroundColor(Color.alpha(800));
+            whichButton.setBackgroundColor(Color.rgb(0, 200, 0));
         } else {
             whichButton.setBackgroundColor(Color.rgb(200, 0, 0));
         }
