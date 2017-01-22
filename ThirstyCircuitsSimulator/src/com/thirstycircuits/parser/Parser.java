@@ -64,21 +64,23 @@ public class Parser
 			int fromId = conn.getInt("fromid");
 			int toId = conn.getInt("toid");
 			int toNode = conn.getInt("tonode");
-
-			if (fromId == -1)
+			if (fromId != -1 || toId != -1 || toNode != -1)
 			{
-				Value v = new Value();
-				components[toId].setInput(toNode, v);
-				inputs.add(v);
-			}
-			else if (toId == -1)
-			{
-				outputs.add(components[fromId].getOutput(0));
-			}
-			else
-			{
-				Value inp = components[fromId].getOutput(0);
-				components[toId].setInput(toNode, inp);
+				if (fromId == -1)
+				{
+					Value v = new Value();
+					components[toId].setInput(toNode, v);
+					inputs.add(v);
+				}
+				else if (toId == -1)
+				{
+					outputs.add(components[fromId].getOutput(0));
+				}
+				else
+				{
+					Value inp = components[fromId].getOutput(0);
+					components[toId].setInput(toNode, inp);
+				}
 			}
 		}
 
