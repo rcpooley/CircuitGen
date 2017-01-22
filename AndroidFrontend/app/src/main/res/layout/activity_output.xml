@@ -44,5 +44,7 @@
         android:layout_height="wrap_content"
         android:onClick="goToTogglePage"
         android:text="Go to Toggle Page"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        android:background="#1B5E20"
+        android:textColor="#E0E0E0"/>
 </LinearLayout>
