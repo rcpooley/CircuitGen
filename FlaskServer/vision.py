@@ -224,11 +224,11 @@ def analyzeCircuit(image):
     }
 
     if (len(components)):
-        for wire in wires:
+        for i, wire in enumerate(wires):
             if (len(wire.toIds)):
                 for toId, toNode in wire.toIds:
                     sendData["connections"].append({
-                        "fromid": wire.fromId,
+                        "fromid": wire.fromId if wire.fromId >=0 else -i - 1,
                         "toid": toId,
                         "tonode": toNode
                     })
