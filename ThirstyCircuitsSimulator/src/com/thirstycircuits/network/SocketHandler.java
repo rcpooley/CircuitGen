@@ -76,6 +76,7 @@ public class SocketHandler
 
 				try
 				{
+					System.out.println(toSendBack.length() + " is the len");
 					socket.getOutputStream().write(toSendBack.getBytes());
 				}
 				catch (IOException e1)
