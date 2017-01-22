@@ -1,9 +1,7 @@
 import cv2
 import numpy as np
 import math
-
-cap = cv2.VideoCapture(0)
-assert cap.isOpened(), 'No cam'
+import json
 
 LOWER_THRESH = np.array([0, 0, 0], dtype=np.uint8)
 UPPER_THRESH = np.array([180, 255, 80], dtype=np.uint8)
@@ -14,7 +12,7 @@ def poly(c, alpha):
     return cv2.approxPolyDP(c, alpha*cv2.arcLength(c, True), True)
 
 def convexRatio(c):
-    return cv2.contourArea(a)/cv2.contourArea(cv2.convexHull(a))
+    return cv2.contourArea(c)/cv2.contourArea(cv2.convexHull(c))
 
 def circleRatio(c):
     return cv2.contourArea(c)/(pow(cv2.minEnclosingCircle(c)[1], 2) * math.pi)
@@ -159,11 +157,11 @@ class Wire():
 
 
 def analyzeCircuit(image):
-    flag, frame = cap.read()
-    assert flag, 'No frame'
 
+    nparr = np.fromstring(image.read(), np.uint8)
+    frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-
+    print frame
     totalArea = frame.shape[0] * frame.shape[1]
     minArea = totalArea / 1690
 
@@ -237,5 +235,7 @@ def analyzeCircuit(image):
                     "tonode": -1
                 })
 
-    return sendData
+    print 'saved image to "image.jpg": ' + str(cv2.imwrite('image.jpg', frame))
+
+    return json.dumps(sendData)
 

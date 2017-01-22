@@ -14,7 +14,7 @@ def poly(c, alpha):
     return cv2.approxPolyDP(c, alpha*cv2.arcLength(c, True), True)
 
 def convexRatio(c):
-    return cv2.contourArea(a)/cv2.contourArea(cv2.convexHull(a))
+    return cv2.contourArea(c)/cv2.contourArea(cv2.convexHull(c))
 
 def circleRatio(c):
     return cv2.contourArea(c)/(pow(cv2.minEnclosingCircle(c)[1], 2) * math.pi)
