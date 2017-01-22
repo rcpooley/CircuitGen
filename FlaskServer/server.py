@@ -1,6 +1,6 @@
 from flask import Flask, request
 import socket
-#import vision.py
+import vision
 app = Flask(__name__)
 
 xorCircuitJson = '{"components":[2,2,2,2,2,1,1],"connections":[{"toid":0,"fromid":-1,"tonode":0},{"toid":-1,"fromid":0,"tonode":0},{"toid":1,"fromid":-1,"tonode":0},{"toid":2,"fromid":-1,"tonode":0},{"toid":3,"fromid":-1,"tonode":0},{"toid":4,"fromid":-1,"tonode":0},{"toid":5,"fromid":3,"tonode":0},{"toid":5,"fromid":4,"tonode":1},{"toid":-1,"fromid":5,"tonode":0},{"toid":6,"fromid":1,"tonode":0},{"toid":6,"fromid":2,"tonode":1},{"toid":-1,"fromid":6,"tonode":0}]}';
@@ -10,8 +10,8 @@ xorCircuitJson = '{"components":[2,2,2,2,2,1,1],"connections":[{"toid":0,"fromid
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        f.save(f.filename)
-        return sendstring(xorCircuitJson)
+        print ''.join(['{:02x}'.format(ord(c)) for c in f.stream.read()[:10]])
+        return sendstring(vision.analyzeCircuit(f.filename))
 
 
 @app.route("/")
