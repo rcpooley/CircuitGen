@@ -157,7 +157,9 @@ class Wire():
 
 
 def analyzeCircuit(image):
-    frame = cv2.imread(image)
+
+    nparr = np.fromstring(image.read(), np.uint8)
+    frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     print frame
     totalArea = frame.shape[0] * frame.shape[1]

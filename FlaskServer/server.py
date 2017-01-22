@@ -10,8 +10,8 @@ xorCircuitJson = '{"components":[2,2,2,2,2,1,1],"connections":[{"toid":0,"fromid
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        print ''.join(['{:02x}'.format(ord(c)) for c in f.stream.read()[:10]])
-        return sendstring(vision.analyzeCircuit(f.filename))
+        #print ''.join(['{:02x}'.format(ord(c)) for c in f.stream.read()[:10]])
+        return sendstring(vision.analyzeCircuit(f.stream))
 
 
 @app.route("/")
