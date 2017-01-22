@@ -170,6 +170,8 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, LOWER_THRESH, UPPER_THRESH)
     mask = cv2.dilate(mask, np.ones((5,5),np.uint8), iterations=1)
+    mask = cv2.rectangle(mask, (0, 0), (mask.shape[1] - 1, mask.shape[0] - 1), 0, 1)
+
 
     # blur = cv2.GaussianBlur(mask, (0, 0), 3)
     # mask = cv2.addWeighted(mask, 1.5, blur, -0.5, 0)
@@ -205,7 +207,7 @@ while True:
         comp.draw(frame, mask)
 
     _, wireContours, hierarchy = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    wireContours = [a for a in wireContours if cv2.contourArea(a) > minArea]
+    wireContours = [a for a in wireContours if cv2.contourArea(a) > minArea / 2]
     wireContours = [poly(cont, 0.001) for cont in wireContours]
     cv2.drawContours(frame, wireContours, -1, (255,255,255), 1)
 
