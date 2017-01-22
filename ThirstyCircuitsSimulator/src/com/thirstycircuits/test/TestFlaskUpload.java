@@ -19,19 +19,13 @@ public class TestFlaskUpload
 	{
 		Resources.init();
 
-		BufferedImage toUpload = Resources.getImage("po");
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(toUpload, "png", baos);
-		baos.flush();
-		byte[] imageBytes = baos.toByteArray();
-		baos.close();
-
-		//uploadImage(imageBytes);
+		uploadImage(TestFlaskUpload.class.getResourceAsStream("/res/po.png"));
 	}
 
 	public static void uploadImage(InputStream stream) throws IOException
 	{
 		String url = "http://54.213.237.53:5000/";
+		url = "http://localhost:5000/upload";
 		String charset = "UTF-8";
 		String boundary = Long.toHexString(System.currentTimeMillis());
 		String CRLF = "\r\n";

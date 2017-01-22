@@ -42,6 +42,11 @@ require('connect.php');
             images[toload[s]] = img;
         }
 
+        function Value()
+        {
+            this.value = false;
+        }
+
         function Component(type, x, y, w, h)
         {
             this.type = type;
@@ -50,17 +55,59 @@ require('connect.php');
             this.w = w;
             this.h = h;
             this.rotation = 0;
+            this.inputs = [new Value()];
+            if (type == "and" || type == "or")
+            {
+                this.inputs.push(new Value());
+            }
+            this.outputs = [new Value()];
             this.getAngle = function() {
                 if (this.rotation == 0) return 0;
                 else if (this.rotation == 1) return Math.PI / 2;
                 else if (this.rotation == 2) return Math.PI;
                 else return Math.PI * 3 / 2;
             };
+            this.getDots = function() {
+                var dots = [];
+
+                var ni = this.inputs.length;
+                if (rotation % 2 == 0)
+                {
+                    var x = rotation == 0 ? 0 : 1;
+                    if (ni == 2)
+                    {
+                        dots.push({x: x, y: 0.25});
+                        dots.push({x: x, y: 0.75});
+                    }
+                    else
+                    {
+                        dots.push({x: x, y: 0.5});
+                    }
+                    dots.push({x: 1 - x, y: 0.5});
+                }
+                else
+                {
+                    var y = rotation == 1 ? 0 : 1;
+                    if (ni == 2)
+                    {
+                        dots.push({x: 0.25, y: y});
+                        dots.push({x: 0.75, y: y});
+                    }
+                    else
+                    {
+                        dots.push({x: 0.5, y: y});
+                    }
+                    dots.push({x: 0.5, y: 1 - y});
+                }
+
+                return dots;
+            };
         }
 
         var mse = {x: 0, y: 0};
         var components = [];
         var tempComponent, hoverComponent;
+        var wiringMode = false;
 
         function updateTempComponent(type)
         {
@@ -115,7 +162,7 @@ require('connect.php');
                 ctx.drawImage(img, -wid / 2, -hei / 2, wid, hei);
                 ctx.restore();
 
-                if (c != tempComponent && mse.x >= xx && mse.y >= yy && mse.x < xx + wid && mse.y < yy + hei)
+                if (!wiringMode && c != tempComponent && mse.x >= xx && mse.y >= yy && mse.x < xx + wid && mse.y < yy + hei)
                 {
                     hoverComp = c;
                     ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
@@ -123,6 +170,12 @@ require('connect.php');
                 }
             }
             hoverComponent = hoverComp;
+
+            //draw wire nodes
+            if (wiringMode)
+            {
+
+            }
         }
         setInterval(draw, 1000 / 60);
 
@@ -136,9 +189,20 @@ require('connect.php');
         //Key listener
         $('body').keydown(function(e) {
             var c = String.fromCharCode(e.keyCode);
-            if (c in types)
+            if (!wiringMode)
             {
-                updateTempComponent(types[c]);
+                if (c in types)
+                {
+                    updateTempComponent(types[c]);
+                }
+            }
+
+            if (c == "W")
+            {
+                if (typeof tempComponent == "undefined")
+                {
+                    wiringMode = !wiringMode;
+                }
             }
         });
 
@@ -150,22 +214,28 @@ require('connect.php');
         $(canvas).mouseup(function (e) {
             if (e.button == 0)
             {
-                if (typeof tempComponent != "undefined")
+                if (!wiringMode)
                 {
-                    components.push(tempComponent);
-                    tempComponent = undefined;
-                }
-                else if (typeof hoverComponent != "undefined")
-                {
-                    components.splice(components.indexOf(hoverComponent), 1);
-                    tempComponent = hoverComponent;
+                    if (typeof tempComponent != "undefined")
+                    {
+                        components.push(tempComponent);
+                        tempComponent = undefined;
+                    }
+                    else if (typeof hoverComponent != "undefined")
+                    {
+                        components.splice(components.indexOf(hoverComponent), 1);
+                        tempComponent = hoverComponent;
+                    }
                 }
             }
             else if (e.button == 2)
             {
-                var rot = tempComponent.rotation + 1;
-                if (rot >= 4) rot = 0;
-                tempComponent.rotation = rot;
+                if (typeof tempComponent != "undefined")
+                {
+                    var rot = tempComponent.rotation + 1;
+                    if (rot >= 4) rot = 0;
+                    tempComponent.rotation = rot;
+                }
             }
         });
 
