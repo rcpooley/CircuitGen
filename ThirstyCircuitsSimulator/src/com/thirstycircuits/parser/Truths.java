@@ -21,6 +21,7 @@ public class Truths
 		JSONObject obj = new JSONObject();
 		obj.put("success", true);
 		obj.put("table", table);
+		obj.put("numinputs", numInputs);
 		return obj.toString();
 	}
 
