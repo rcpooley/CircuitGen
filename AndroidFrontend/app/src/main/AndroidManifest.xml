@@ -37,7 +37,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Output"></activity>
+        <activity android:name=".Output" />
+        <activity android:name=".TogglePage"></activity>
     </application>
 
 </manifest>

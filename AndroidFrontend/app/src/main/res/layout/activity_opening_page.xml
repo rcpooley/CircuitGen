@@ -4,6 +4,7 @@
     android:id="@+id/activity_opening_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -12,44 +13,30 @@
     tools:context="com.circuits.android.circuits.OpeningPage">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Take a picture of the circuit."
-        android:onClick="cameraIntent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No error so far..."
-        android:id="@+id/errorTextView"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No file inputted so far"
-        android:id="@+id/workingornot"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Does the file exist?"
-        android:id="@+id/exists"/>
+        android:background="#1B5E20"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="cameraIntent"
+        android:text="Take a picture of the circuit"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#E0E0E0" />
 
     <ImageView
+        android:id="@+id/imageTaken"
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/imageTaken"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height and Width"
-        android:id="@+id/hw"/>
+        android:layout_height="200dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Output"
-        android:onClick="goToOutput"/>
+        android:background="#1B5E20"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="goToOutput"
+        android:text="Go to Truth Table"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#E0E0E0" />
 
 </LinearLayout>

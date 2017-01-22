@@ -1,74 +1,89 @@
 package com.circuits.android.circuits;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
 
 import static android.R.id.input;
+import com.google.gson.Gson;
 
 public class Output extends AppCompatActivity {
+
+    Truth truthInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_output);
 
+        truthInfo = OpeningPage.getObject();
+
         tableInit();
     }
 
     public void tableInit() {
         TableLayout truthTable = (TableLayout) findViewById(R.id.truthTable);
+        truthTable.setStretchAllColumns(true);
 
-        TableRow topHeader = new TableRow(this);
-
-        TextView headerText = new TextView(this);
-        headerText.setText("Truth Table Based on Your Pics");
-        topHeader.addView(headerText);
+        int numberofInputs = truthInfo.getNumInputs();
 
         TableRow actualTable = new TableRow(this);
 
-        LinearLayout cellOne = new LinearLayout(this);
+        for(int i = 0; i < truthInfo.getTable().length; i++) { //creates four columns
 
-        TextView headerinput1 = new TextView(this);
-        headerinput1.setText("Input 1");
-        TextView inputone = new TextView(this);
-        inputone.setText("0");
-        TextView inputtwo = new TextView(this);
-        inputtwo.setText("0");
-        TextView inputthree = new TextView(this);
-        inputthree.setText("1");
-        TextView inputfour = new TextView(this);
-        inputfour.setText("1");
+            LinearLayout currentColumn = new LinearLayout(this);
+            currentColumn.setOrientation(LinearLayout.VERTICAL);
 
-        cellOne.addView(inputone);
-        cellOne.addView(inputtwo);
-        cellOne.addView(inputthree);
-        cellOne.addView(inputfour);
+            TextView headerInput = new TextView(this);
+            if (i < truthInfo.getNumInputs()) {
+                headerInput.setText("INPUT " + (i + 1));
+            }
+            else {
+                headerInput.setText("OUTPUT " + (i - truthInfo.getNumInputs() + 1));
+            }
+            headerInput.setTypeface(null, Typeface.BOLD);
 
+            currentColumn.addView(headerInput);
+            currentColumn.setPadding(24,0,24,0);
 
-        LinearLayout cellTwo = new LinearLayout(this);
+            for (int j = 0; j < truthInfo.getTable()[0].length; j++) { //each column gets 16 parts
+                TextView indCell = new TextView(this); //given an array the column is each one input
 
-        TextView headerinput2 = new TextView(this);
-        headerinput2.setText("Input 1");
-        TextView input1 = new TextView(this);
-        input1.setText("0");
-        TextView input2 = new TextView(this);
-        input2.setText("1");
-        TextView input3 = new TextView(this);
-        input3.setText("0");
-        TextView input4 = new TextView(this);
-        input4.setText("1");
+                String cellString = "" + truthInfo.getTable()[i][j];
+                indCell.setText(cellString.toUpperCase());
 
-        cellOne.addView(input1);
-        cellOne.addView(input2);
-        cellOne.addView(input3);
-        cellOne.addView(input4);
+                indCell.setPadding(8,8,8,8);
 
-        actualTable.addView(cellOne);
-        actualTable.addView(cellTwo);
+                if(truthInfo.getTable()[i][j]) {
+                    indCell.setTextColor(Color.rgb(0,200,0));
+                } else {
+                    indCell.setTextColor(Color.rgb(200, 0,0));
+                }
 
+                currentColumn.addView(indCell, new TableLayout.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            }
+
+            actualTable.addView(currentColumn);
+        }
+
+        //truthTable.addView(topHeader);
+        truthTable.addView(actualTable);
+
+    }
+
+    public void goToTogglePage (View view) {
+        Intent transitionintent = new Intent(this, TogglePage.class);
+        startActivity(transitionintent);
     }
 }

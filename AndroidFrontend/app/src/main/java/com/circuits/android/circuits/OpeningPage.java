@@ -1,24 +1,19 @@
 package com.circuits.android.circuits;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-//import android.support.v4.app.FragmentActivity;
-import android.app.Fragment;
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.provider.Settings;
+
 import android.support.v4.content.FileProvider;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Handler;
@@ -35,8 +30,9 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static android.app.ProgressDialog.STYLE_SPINNER;
 import static android.os.Environment.getExternalStoragePublicDirectory;
-import static com.circuits.android.circuits.R.id.hw;
+import com.google.gson.Gson;
 
 
 public class OpeningPage extends Activity {
@@ -53,7 +49,8 @@ public class OpeningPage extends Activity {
      */
 
     NetworkTask onetask = null;
-
+    volatile static String jsonString = "";
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +71,9 @@ public class OpeningPage extends Activity {
                 if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 
                     Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-                    TextView hw = (TextView) findViewById(R.id.hw);
 
                     if (myBitmap == null && counter < 20) {
                         handler.postDelayed(this, 200);
-                    } else {
-                        hw.setText(myBitmap.getHeight() + " " + myBitmap.getWidth());
                     }
 
                     ImageView myImage = (ImageView) findViewById(R.id.imageTaken);
@@ -96,15 +90,13 @@ public class OpeningPage extends Activity {
 
     public void cameraIntent(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        TextView errorMessage = (TextView) findViewById(R.id.errorTextView);
 
         File photoFile = null;
 
         try {
             photoFile = createImageFile();
         } catch (IOException ex) {
-
-            errorMessage.setText("Error: File not made correctly!");
+            ex.printStackTrace();
         }
 
         Uri photoURI = null;
@@ -118,15 +110,8 @@ public class OpeningPage extends Activity {
         }
 
         if (photoURI != null) {
-            TextView working = (TextView) findViewById(R.id.workingornot);
 
             File imgFile = new File(mCurrentPhotoPath);
-
-            working.setText(mCurrentPhotoPath);
-
-            TextView exists = (TextView) findViewById(R.id.exists);
-
-            exists.setText(imgFile.exists() + " ");
 
             if (imgFile.exists()) { //so file and picture DO exist... why can't I get them?
 
@@ -134,19 +119,13 @@ public class OpeningPage extends Activity {
                 if (onetask != null) {
                     onetask.destroy();
                 }
+
                 onetask = new NetworkTask();
                 onetask.execute(mCurrentPhotoPath);
+
                 System.out.println("After Execute");
 
                 Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-                TextView hw = (TextView) findViewById(R.id.hw);
-
-                if (myBitmap != null) {
-                    hw.setText(myBitmap.getHeight() + " " + myBitmap.getWidth());
-                } else {
-                    hw.setText("BitMap is null.");
-                }
-
 
                 ImageView myImage = (ImageView) findViewById(R.id.imageTaken);
                 myImage.setImageBitmap(myBitmap);
@@ -176,6 +155,9 @@ public class OpeningPage extends Activity {
         Intent transitionIntent = new Intent(this, Output.class);
         startActivity(transitionIntent);
     }
+
+
+
 
 
     class NetworkTask extends AsyncTask<String, Void, String> {
@@ -209,7 +191,7 @@ public class OpeningPage extends Activity {
         }
 
         public void uploadImage(InputStream stream) throws IOException {
-            String url = "http://54.213.237.53:5000/";
+            String url = "http://54.213.237.53:5000/upload";
             String charset = "UTF-8";
             String boundary = Long.toHexString(System.currentTimeMillis());
             String CRLF = "\r\n";
@@ -229,7 +211,7 @@ public class OpeningPage extends Activity {
                 writer.append(CRLF).flush();
 
                 int read = 0;
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[2048];
                 while ((read = stream.read(buffer)) > 0) {
                     output.write(buffer, 0, read);
                 }
@@ -239,8 +221,27 @@ public class OpeningPage extends Activity {
                 writer.append("--" + boundary + "--").append(CRLF).flush();
             }
 
+            //DialogFragment popup = new LoadingDialog();
+            //popup.show(act.getFragmentManager(), "Loading");
+
+            Handler handler = new Handler(OpeningPage.this.getMainLooper());
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progress = new ProgressDialog(OpeningPage.this, STYLE_SPINNER);
+                    progress.setTitle("Loading");
+                    progress.setMessage("Image currently uploading...");
+                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                    progress.show();
+                }
+            });
+
+// To dismiss the dialog
             int code = connection.getResponseCode();
             System.out.println(code);
+
+            progress.dismiss();
 
             InputStream input;
             if (code == 200)
@@ -250,14 +251,31 @@ public class OpeningPage extends Activity {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String line;
+
+            jsonString = "";
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                jsonString += line;
             }
+            System.out.println(jsonString);
             reader.close();
         }
 
         public void destroy() {
             running = false;
         }
+
+    }
+
+    public static Truth getObject() {
+        System.out.println("get object" + jsonString);
+         // Or use new GsonBuilder().create();
+        if (jsonString == null) {
+            return null;
+        }
+
+        Gson gson = new Gson();
+        Truth target = gson.fromJson(jsonString, Truth.class); // deserializes json into target2
+        System.out.println(target);
+        return target;
     }
 }
