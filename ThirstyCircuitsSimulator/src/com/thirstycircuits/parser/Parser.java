@@ -96,7 +96,7 @@ public class Parser
 				//Set inputs
 				for (int j = 0; j < circuit.getInputs().length; j++)
 				{
-					table[j][i] = isSet(i, j);
+					table[j][i] = isSet(i, circuit.getInputs().length - j - 1);
 					circuit.getInputs()[j].setValue(table[j][i]);
 				}
 

@@ -4,7 +4,7 @@ require('connect.php');
     <html>
     <head>
         <title>Circuit Simulator</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="jquery-3.1.1.min.js"></script>
         <style>
             #mycanvas {
                 position: absolute;
@@ -71,9 +71,9 @@ require('connect.php');
                 var dots = [];
 
                 var ni = this.inputs.length;
-                if (rotation % 2 == 0)
+                if (this.rotation % 2 == 0)
                 {
-                    var x = rotation == 0 ? 0 : 1;
+                    var x = this.rotation == 0 ? 0 : 1;
                     if (ni == 2)
                     {
                         dots.push({x: x, y: 0.25});
@@ -87,7 +87,7 @@ require('connect.php');
                 }
                 else
                 {
-                    var y = rotation == 1 ? 0 : 1;
+                    var y = this.rotation == 1 ? 0 : 1;
                     if (ni == 2)
                     {
                         dots.push({x: 0.25, y: y});
@@ -107,6 +107,7 @@ require('connect.php');
         var mse = {x: 0, y: 0};
         var components = [];
         var tempComponent, hoverComponent;
+        var hoverNode, tempNode;
         var wiringMode = false;
 
         function updateTempComponent(type)
@@ -147,7 +148,7 @@ require('connect.php');
             var todraw = components;
             if (typeof tempComponent != "undefined")
                 todraw = todraw.concat(tempComponent);
-            var hoverComp;
+            var hoverComp, hoverNod;
             for (var ind in todraw)
             {
                 var c = todraw[ind];
@@ -157,7 +158,7 @@ require('connect.php');
                 var wid = c.w * pixelRatio;
                 var hei = c.h * pixelRatio;
                 ctx.save();
-                ctx.translate(xx + wid / 2, yy + wid / 2)
+                ctx.translate(xx + wid / 2, yy + wid / 2);
                 ctx.rotate(c.getAngle());
                 ctx.drawImage(img, -wid / 2, -hei / 2, wid, hei);
                 ctx.restore();
@@ -168,14 +169,37 @@ require('connect.php');
                     ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
                     ctx.fillRect(xx, yy, wid, hei);
                 }
+
+                //draw wire nodes
+                if (wiringMode)
+                {
+                    var osize = 10;
+
+                    var dots = c.getDots();
+                    for (var i = 0; i < dots.length; i++)
+                    {
+                        var dot = dots[i];
+                        var xxx  = xx + dot.x * wid - osize / 2;
+                        var yyy = yy + dot.y * hei - osize / 2;
+                        ctx.fillStyle = '#00ff00';
+
+                        if (mse.x >= xxx && mse.y >= yyy && mse.x < xxx + osize && mse.y < yyy + osize)
+                        {
+                            hoverNod = {id: ind, node: i};
+                            ctx.fillStyle = 'rgb(0,0,255)';
+                        }
+
+                        if (typeof tempNode != "undefined" && tempNode.id == ind && tempNode.node == i)
+                        {
+                            ctx.fillStyle = '#ffb3b3';
+                        }
+
+                        ctx.fillRect(xxx, yyy, osize, osize);
+                    }
+                }
             }
             hoverComponent = hoverComp;
-
-            //draw wire nodes
-            if (wiringMode)
-            {
-
-            }
+            hoverNode = hoverNod;
         }
         setInterval(draw, 1000 / 60);
 
@@ -204,6 +228,12 @@ require('connect.php');
                     wiringMode = !wiringMode;
                 }
             }
+
+            if (e.keyCode == 27)
+            {
+                tempComponent = undefined;
+                tempNode = undefined;
+            }
         });
 
         $(canvas).mousemove(function (e) {
@@ -225,6 +255,13 @@ require('connect.php');
                     {
                         components.splice(components.indexOf(hoverComponent), 1);
                         tempComponent = hoverComponent;
+                    }
+                }
+                else
+                {
+                    if (typeof hoverNode != "undefined")
+                    {
+                        tempNode = hoverNode;
                     }
                 }
             }

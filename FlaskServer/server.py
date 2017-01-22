@@ -1,9 +1,9 @@
 from flask import Flask, request
 import socket
-import vision.py
+#import vision.py
 app = Flask(__name__)
 
-xorCircuitJson = '{"components":[3,3,3,3,0,0,1],"connections":[{"toid":0,"fromid":-1,"tonode":0},{"toid":1,"fromid":-1,"tonode":0},{"toid":2,"fromid":-1,"tonode":0},{"toid":3,"fromid":-1,"tonode":0},{"toid":4,"fromid":0,"tonode":0},{"toid":4,"fromid":1,"tonode":1},{"toid":5,"fromid":2,"tonode":0},{"toid":5,"fromid":3,"tonode":1},{"toid":6,"fromid":4,"tonode":0},{"toid":6,"fromid":5,"tonode":1},{"toid":-1,"fromid":6,"tonode":0}]}';
+xorCircuitJson = '{"components":[2,2,2,2,2,1,1],"connections":[{"toid":0,"fromid":-1,"tonode":0},{"toid":-1,"fromid":0,"tonode":0},{"toid":1,"fromid":-1,"tonode":0},{"toid":2,"fromid":-1,"tonode":0},{"toid":3,"fromid":-1,"tonode":0},{"toid":4,"fromid":-1,"tonode":0},{"toid":5,"fromid":3,"tonode":0},{"toid":5,"fromid":4,"tonode":1},{"toid":-1,"fromid":5,"tonode":0},{"toid":6,"fromid":1,"tonode":0},{"toid":6,"fromid":2,"tonode":1},{"toid":-1,"fromid":6,"tonode":0}]}';
 
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -25,10 +25,16 @@ def sendstring(str):
     sock.send(str.encode(encoding='UTF-8'))
     sock.settimeout(5)
 
-    try:
-        ret = sock.recv(1024)
-    except socket.timeout:
-        ret = "[timed out]"
+    ret = ""
+
+    read = 1024
+    while read == 1024:
+        try:
+            n = sock.recv(1024)
+            read = len(n)
+            ret += n
+        except socket.timeout:
+            ret = "[timed out]"
 
     sock.close()
     return ret
