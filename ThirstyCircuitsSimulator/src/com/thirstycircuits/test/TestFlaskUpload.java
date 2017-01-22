@@ -18,14 +18,13 @@ public class TestFlaskUpload
 	public static void main(String[] args) throws IOException
 	{
 		Resources.init();
-
-		uploadImage(TestFlaskUpload.class.getResourceAsStream("/res/po.png"));
+		uploadImage(TestFlaskUpload.class.getResourceAsStream("/res/circuit.png"));
 	}
 
 	public static void uploadImage(InputStream stream) throws IOException
 	{
-		String url = "http://54.213.237.53:5000/";
-		url = "http://localhost:5000/upload";
+		String url = "http://54.213.237.53:5000/upload";
+		//url = "http://localhost:5000/upload";
 		String charset = "UTF-8";
 		String boundary = Long.toHexString(System.currentTimeMillis());
 		String CRLF = "\r\n";

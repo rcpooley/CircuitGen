@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Test Camera</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <script src="jquery-3.1.1.min.js"></script>
+    <style>
+        #main {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <form id="theform" action="upload.php" method="post" enctype="multipart/form-data">
+        <input id="fileinput" name="image" type="file" accept="image/*" capture="camera" value="Take Picture" style="display:none"/>
+    </form>
+    <input type="submit" value="Go" id="gobutton"/>
+</div>
+<div id="msg"></div>
+<script>
+    $('#gobutton').click(function() {
+        $('#fileinput').click();
+    })
+
+    $('#fileinput').on('change', function() {
+        $('#theform').submit();
+    });
+</script>
+</body>
+</html>
