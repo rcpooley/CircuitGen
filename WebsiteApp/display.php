@@ -44,6 +44,7 @@ if (!isset($_SESSION['json']))
 
         .tcell {
             display: table-cell;
+            vertical-align: middle;
         }
     </style>
 </head>

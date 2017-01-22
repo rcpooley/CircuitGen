@@ -58,6 +58,8 @@ public class Parser
 
 		List<Value> inputs = new ArrayList<>(), outputs = new ArrayList<>();
 
+		Map<Integer, Value> cachedInputs = new HashMap<>();
+
 		for (int i = 0; i < conns.length(); i++)
 		{
 			JSONObject conn = conns.getJSONObject(i);
@@ -66,9 +68,19 @@ public class Parser
 			int toNode = conn.getInt("tonode");
 			if (fromId != -1 || toId != -1 || toNode != -1)
 			{
-				if (fromId == -1)
+				if (fromId < 0)
 				{
-					Value v = new Value();
+					Value v;
+					if (cachedInputs.containsKey(fromId))
+					{
+						//v = cachedInputs.get(fromId);
+						v = new Value();
+					}
+					else
+					{
+						v = new Value();
+						cachedInputs.put(fromId, v);
+					}
 					components[toId].setInput(toNode, v);
 					inputs.add(v);
 				}

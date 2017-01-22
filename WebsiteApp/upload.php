@@ -6,7 +6,7 @@ $target_file = $_FILES["image"]["tmp_name"];
 //move_uploaded_file($_FILES["image"]["tmp_name"], 'uploads/' . basename($_FILES["image"]["name"]));
 
 // initialise the curl request
-$request = curl_init('http://circuitgen.tk:5001/upload');
+$request = curl_init('http://circuitgen.tk:5000/upload');
 
 // send a file
 curl_setopt($request, CURLOPT_POST, true);

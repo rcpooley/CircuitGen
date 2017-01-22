@@ -30,8 +30,8 @@
       <file leaf-file-name="TestFlaskUpload.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/test/TestFlaskUpload.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-499">
-              <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+            <state relative-caret-position="289">
+              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -40,10 +40,58 @@
       <file leaf-file-name="Parser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/parser/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="83" column="13" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+            <state relative-caret-position="293">
+              <caret line="76" column="40" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
               <folding>
                 <element signature="method#getComponentId#0;class#Parser#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Component.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Component.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+              <folding>
+                <element signature="method#Component#0;class#Component#0" expanded="false" />
+                <element signature="method#calcOutputs#0;class#Component#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RelayGate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/RelayGate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Value.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Value.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+              <folding>
+                <element signature="e#447#448#0" expanded="true" />
+                <element signature="e#475#476#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/test/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="197" selection-start-line="12" selection-start-column="197" selection-end-line="12" selection-end-column="197" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,7 +120,6 @@
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/core/Input.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/core/Value.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/parser/Connection.java" />
-        <option value="$PROJECT_DIR$/src/com/thirstycircuits/test/Test.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/display/ThirstyDisplay.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/display/LocComponent.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/display/Resources.java" />
@@ -89,6 +136,7 @@
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/parser/ImageGen.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/parser/Truths.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/network/SocketHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/thirstycircuits/test/Test.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/test/TestFlaskUpload.java" />
         <option value="$PROJECT_DIR$/src/com/thirstycircuits/parser/Parser.java" />
       </list>
@@ -204,7 +252,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -727,9 +775,9 @@
     <recent_temporary>
       <list size="4">
         <item index="0" class="java.lang.String" itemvalue="Application.TestFlaskUpload" />
-        <item index="1" class="java.lang.String" itemvalue="Application.NetworkMain" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
         <item index="2" class="java.lang.String" itemvalue="Application.CircuitDrawer" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="3" class="java.lang.String" itemvalue="Application.NetworkMain" />
       </list>
     </recent_temporary>
   </component>
@@ -750,12 +798,12 @@
       <workItem from="1484982114658" duration="15647000" />
       <workItem from="1485028693573" duration="9237000" />
       <workItem from="1485047144457" duration="1883000" />
-      <workItem from="1485052843486" duration="19221000" />
+      <workItem from="1485052843486" duration="22465000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55204000" />
+    <option name="totallyTimeSpent" value="58448000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -768,7 +816,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -777,7 +825,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2956989" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30376345" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -888,22 +936,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Input.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Value.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#192#193#0" expanded="false" />
-            <element signature="e#233#234#0" expanded="false" />
-            <element signature="e#264#265#0" expanded="false" />
-            <element signature="e#283#284#0" expanded="false" />
-            <element signature="e#447#448#0" expanded="false" />
-            <element signature="e#475#476#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/display/ThirstyDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -928,7 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/test/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/AndGate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -971,20 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/RelayGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#184#185#0" expanded="false" />
-            <element signature="e#202#203#0" expanded="false" />
-            <element signature="e#363#364#0" expanded="false" />
-            <element signature="e#404#405#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/ComponentException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -997,18 +1014,6 @@
         <state relative-caret-position="289">
           <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding>
-            <element signature="method#Component#0;class#Component#0" expanded="false" />
-            <element signature="method#setInput#0;class#Component#0" expanded="false" />
-            <element signature="method#calcOutputs#0;class#Component#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1108,18 +1113,58 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/test/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="197" selection-start-line="12" selection-start-column="197" selection-end-line="12" selection-end-column="197" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/RelayGate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Value.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+          <folding>
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#475#476#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/core/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+          <folding>
+            <element signature="method#Component#0;class#Component#0" expanded="false" />
+            <element signature="method#calcOutputs#0;class#Component#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/test/TestFlaskUpload.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+        <state relative-caret-position="289">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thirstycircuits/parser/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="83" column="13" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+        <state relative-caret-position="293">
+          <caret line="76" column="40" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
           <folding>
             <element signature="method#getComponentId#0;class#Parser#0" expanded="false" />
           </folding>

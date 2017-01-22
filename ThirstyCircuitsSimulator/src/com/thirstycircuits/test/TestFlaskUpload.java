@@ -18,7 +18,7 @@ public class TestFlaskUpload
 	public static void main(String[] args) throws IOException
 	{
 		Resources.init();
-		uploadImage(TestFlaskUpload.class.getResourceAsStream("/res/circuit.png"));
+		uploadImage(TestFlaskUpload.class.getResourceAsStream("/res/twoinputs.png"));
 	}
 
 	public static void uploadImage(InputStream stream) throws IOException
