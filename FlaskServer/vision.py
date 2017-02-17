@@ -192,12 +192,12 @@ def analyzeCircuit(image):
 
     nots = [NOT(a) for a in convexes if len(poly(a, 0.03)) == 3]
     ands = [AND(a) for a in convexes if (len(poly(a, 0.04)) in [4, 5] and circleRatio(a) < 0.75 and circleRatio(a) > 0.5)]
-    ors = [OR(a) for a in nonconvexes if (len(poly(a, 0.04)) in [3, 4, 5] and circleRatio(a) > 0.4)]
+    ors = [OR(a) for a in nonconvexes if (len(poly(a, 0.04)) in [3, 4, 5, 6, 7] and circleRatio(a) > 0.4)]
 
     if (len(contours)):
-        # cv2.drawContours(frame, contours, -1, (255, 0, 0), 1)
-        # cv2.drawContours(frame, polys, -1, (0, 255, 0), 1)
-        # cv2.drawContours(frame, nonconvexes, -1, (0, 0, 255), 1)
+        cv2.drawContours(frame, contours, -1, (255, 0, 0), 2)
+        cv2.drawContours(frame, polys, -1, (0, 255, 0), 2)
+        cv2.drawContours(frame, nonconvexes, -1, (0, 0, 255), 2)
         pass
 
     components = []
